@@ -1456,7 +1456,7 @@ __metadata:
 
 "@phfaist/zoodb@https://github.com/phfaist/zoodb.git":
   version: 0.1.1
-  resolution: "@phfaist/zoodb@https://github.com/phfaist/zoodb.git#commit=8bf01a774ff98b5beeb81754befc3867e67c00ea"
+  resolution: "@phfaist/zoodb@https://github.com/phfaist/zoodb.git#commit=691507eb9ed82b59fd1fea1acef9637ece46ed54"
   dependencies:
     "@apidevtools/json-schema-ref-parser": "npm:^11.7.3"
     base32-encode: "npm:^2.0.0"
@@ -1476,7 +1476,7 @@ __metadata:
     sax: "npm:^1.4.1"
     stream-parser: "npm:^0.3.1"
     url: "npm:^0.11.4"
-  checksum: 10c0/b5a06c5e3a675514efe8ffff5fdc25436d7105fddd2b427a200501a5460dde0184480ea56309672fd2e49d8295f4bf8006c43729c349804d618433aa08c307bf
+  checksum: 10c0/345bcb668d47445dae69c62854262e556db548ef4f22967397195f4679e3871518825f4380ecda094eae7629734f18f98a04c9f7f61a24cb23ade1a14d6677fc
   languageName: node
   linkType: hard
 
@@ -2022,9 +2022,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001688":
-  version: 1.0.30001688
-  resolution: "caniuse-lite@npm:1.0.30001688"
-  checksum: 10c0/2ef3145ac69ea5faf403b613912a3a72006db2e004e58abcf40dc89904aa05568032b5a6dcfb267556944fd380a9b018ad645f93d84e543bed3471e4950a89f4
+  version: 1.0.30001755
+  resolution: "caniuse-lite@npm:1.0.30001755"
+  checksum: 10c0/7b8e32a4ec307b50f557d30176651cf69f20a0ea4de6f5f34149ea65a1f0cfcc0677b403484aea3661c7469ab11f2df6528027b9ec2d0265635ede9d5b517380
   languageName: node
   linkType: hard
 
