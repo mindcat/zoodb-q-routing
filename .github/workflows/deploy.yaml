@@ -28,7 +28,7 @@ jobs:
           node-version: "20"
 
       - name: Enable Corepack
-              run: corepack enable
+        run: corepack enable
 
       # Install dependencies using Yarn
       - name: Install dependencies
