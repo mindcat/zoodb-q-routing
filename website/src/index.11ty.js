@@ -24,27 +24,27 @@ async function render(data)
     const zoodb = data.zoodb;
 
     let content = `
-<p>List of people:</p>`;
+<p>Routing Algorithm List (prettier render coming when enough data to make a complex graph has been added):</p>`;
 
     content += `
 <ul>`;
 
-    const person_id_list = [ ...Object.keys(zoodb.objects.person) ];
-    person_id_list.sort();
+    const node_id_list = [ ...Object.keys(zoodb.objects.node) ];
+    node_id_list.sort();
 
-    for (const person_id of person_id_list) {
-        // If we'd like to render other properties of `person`, especial FLM
+    for (const node_id of node_id_list) {
+        // If we'd like to render other properties of `node`, especial FLM
         // content that is not marked as standalone-mode compatible, we should
         // use `zooflm.make_and_render_document` with a render callback.
 
-        const person = zoodb.objects.person[person_id];
-        const personHrefUrl = eleventy.hrefUrl(
-            zoodb.zoo_object_permalink('person', person_id)
+        const node = zoodb.objects.node[node_id];
+        const nodeHrefUrl = eleventy.hrefUrl(
+            zoodb.zoo_object_permalink('node', node_id)
         );
-        const personName = render_html_standalone(zoodb.objects.person[person_id].name);
+        const nodeName = render_html_standalone(zoodb.objects.node[node_id].name);
 
         content += `
-<li><a href="${ personHrefUrl }">${ personName }</a></li>
+<li><a href="${ nodeHrefUrl }">${ nodeName }</a></li>
 `;
     }
 

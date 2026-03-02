@@ -1,0 +1,8 @@
+node_id: lookahead_swap
+name: "Lookahead Swap (LKHD)"
+paradigm: "Static (SWAP)"
+complexity: "Exponential"
+summary: |
+  The Lookahead Swap (LKHD) algorithm is a heuristic approach designed to mitigate the fundamental weakness of greedy, local routing by predicting the impact of current SWAP choices on future circuit complexity. It selects the top N possible SWAP operations for the current gate and then recursively evaluates the potential benefit of these choices over M future steps.
+
+  While it effectively minimizes the anticipated need for future SWAPs, the primary limitation of Lookahead Swap is its prohibitively high computational complexity and resulting poor scalability.

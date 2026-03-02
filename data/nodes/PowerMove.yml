@@ -1,0 +1,10 @@
+node_id: powermove
+name: "PowerMove"
+paradigm: "Dynamic (NAQC / Zoned Architecture)"
+summary: |
+  PowerMove is an optimizing compilation framework specifically designed for Neutral Atom Quantum Computers (NAQCs) that utilize a Zoned Architecture (ZA). PowerMove addresses the distinct challenges of NAQCs, which feature advanced capabilities such as collective qubit movement.
+
+  Central to its innovation is the Continuous Router, which integrates qubit allocation and movement decisions to facilitate direct transitions between required layouts for subsequent stages. The framework integrates three specialized components to manage the complexities of gate scheduling, qubit allocation, qubit movement, and inter-zone communication. Benchmarks indicate that PowerMove provides substantial improvements in fidelity and reductions in execution time compared to previous NAQC compilers.
+relations:
+  improves_upon:
+    - node_id: enola

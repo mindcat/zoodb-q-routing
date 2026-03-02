@@ -1,14 +1,14 @@
-#
-# Preset citations are defined in this file.  You can either paste a
-# readily-formatted FLM citation string in a _ready_formatted: flm: field, or
-# paste the full CSL/JSON entry as YAML or JSON.
-#
-
-
-# e.g., we can use this entry in FLM content as
-# "\cite{preset:AliceAndBobsWonderfulAdventures}"
-AliceAndBobsWonderfulAdventures:
+enola_paper:
   _ready_formatted:
     flm: >-
-      Aaliz & Bibby.  \emph{Alice and Bob's Wonderful Adventures} (2024).
+      D. B. Tan, D. Bluvstein, M. D. Lukin, and J. Cong, \emph{Compiling Quantum Circuits for Dynamically Field-Programmable Neutral Atoms Array Processors}, Quantum, vol. 8, p. 1281 (2024).
 
+herr_thesis:
+  _ready_formatted:
+    flm: >-
+      S. Bonaventure, \emph{High Error Rate Qubit Routing}, Master's thesis (2022).
+
+rl_paper:
+  _ready_formatted:
+    flm: >-
+      D. Kremer, V. Villar, H. Paik, I. Duran, I. Faro, and J. Cruz-Benito, \emph{Practical and efficient quantum circuit synthesis and transpiling with Reinforcement Learning} (2024).

@@ -17,11 +17,8 @@ import { makeStandardYamlDbDataLoader } from '@phfaist/zoodb/std/stdyamldbdatalo
 
 
 // Use __dirname. *Requires Node >= 20.11 / 21.2* .
-// If you need to support older versions of Node, copy the three lines of code given
-// in https://stackoverflow.com/a/50052194/1694896
-const __dirname = import.meta.dirname;
-
-
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const example_root_dir = path.resolve(__dirname, '..');
 
@@ -30,16 +27,12 @@ const example_root_dir = path.resolve(__dirname, '..');
 
 const csl_filename = path.join(__dirname, 'american-physical-society-et-al--patched.csl');
 
-
 // -----------------------------------------------------------------------------
-
 
 // import the permalinks
 import { permalinks } from './permalinks.js';
 
-
 // -----------------------------------------------------------------------------
-
 
 export class MyZooDb extends ZooDb
 {
@@ -48,32 +41,12 @@ export class MyZooDb extends ZooDb
         super(config);
     }
 
-    //
-    // simple example of ZooDb validation -- check that spouses always report
-    // the other spouse as their spouse
-    //
+    // You can add custom validation logic here later for your routing nodes
     async validate()
     {
         super.validate();
-
-        for (const [person_id, person] of Object.entries(this.objects.person)) {
-            if (person.relations != null && person.relations.spouse != null) {
-                // remember, person.relations.spouse is the ID of the spouse
-                // person, not the person object itself
-                const other_person = this.objects.person[person.relations.spouse];
-                if (other_person?.relations?.spouse !== person_id) {
-                    throw new Error(
-                        `Person ‘${person_id}’ lists ‘${person.relations.spouse}’ as their `
-                        + `spouse but not the other way around`
-                    );
-                }
-            }
-        }
     }
-
 }
-
-
 
 export async function createMyZooDb(config = {}, { data_dir, schema_root }={})
 {
@@ -94,70 +67,47 @@ export async function createMyZooDb(config = {}, { data_dir, schema_root }={})
             use_searchable_text_processor,
 
             flm_options: {
-
                 refs:  {
-                    person: {
-                        formatted_ref_flm_text_fn: (person_id, person) => person.name,
+                    // Changed from person to node
+                    node: {
+                        formatted_ref_flm_text_fn: (node_id, node) => node.name,
                     },
                 },
 
                 citations: {
                     csl_style: fs.readFileSync( csl_filename, { encoding: 'utf-8', }, ),
-                    override_arxiv_dois_file:
-                        'citations_info/override_arxiv_dois.yml',
-                    preset_bibliography_files: [
-                        'citations_info/bib_preset.yml',
-                    ],
+                    override_arxiv_dois_file: 'citations_info/override_arxiv_dois.yml',
+                    preset_bibliography_files: [ 'citations_info/bib_preset.yml', ],
                     default_user_agent: null,
                 },
-                
+
                 resources: {
-                    // "null" means to use defaults
                     rename_figure_template: null,
                     figure_filename_extensions: null,
                     graphics_resources_fs_data_dir: null,
-                    
-                    // enable srcset= attributes on <img> tags.  This requires
-                    // postprocessing the site files with ParcelJS, as we indeed
-                    // do in this example setup.
+
                     graphics_use_srcset_parceljs: {
                         enabled: true,
                         image_max_zoom_factor: 2,
                     }
                 },
 
-                environment_options: {
-                    // Options will be passed on to ZooFLMEnvironment's constructor.
-                    // For instance, some might prefer to adjust the parsing state
-                    // to enable dollar-sign math mode ($a+b=c$ instead of \(a+b=c\)).
-                    // See ZooFLMEnvironment()'s documentation and the documentation for
-                    // FLM's `flm.flmenvironment.standard_parsing_state()`.
-
-                    // parsing: {
-                    //     dollar_inline_math_mode: true
-                    // }
-                }
+                environment_options: { }
 
             },
 
             searchable_text_options: {
-                object_types: ['person',]  // which DB object types to search
+                object_types: ['node',]  // which DB object types to search
             },
 
             zoo_permalinks: permalinks,
 
-            //
             // specify where to find schemas
-            //
             schemas: {
                 schema_root: schema_root,
                 schema_rel_path: 'schemas/',
                 schema_add_extension: '.yml',
             },
-            // The SchemaLoader will automatically load all files in the
-            // folder if the schema_root is a filesystem path.  Otherwise,
-            // specify a list of schema names to load here:
-            //schema_names: [ 'person', ]
 
         },
         config
@@ -167,33 +117,22 @@ export async function createMyZooDb(config = {}, { data_dir, schema_root }={})
 }
 
 
-
-
-
-
 // -----------------------------------------------------------------------------
-
-
 
 export async function createMyYamlDbDataLoader(zoodb)
 {
     let config = {
-        //
         // specify objects & where to find them
-        //
         objects: {
-            person: {
-                schema_name: 'person',
-                data_src_path: 'people/',
+            node: {
+                schema_name: 'node',
+                data_src_path: 'nodes/', // Changed folder from people/ to nodes/
             },
         },
-
     }
 
     return await makeStandardYamlDbDataLoader(zoodb, config);
 }
-
-
 
 
 // -----------------------------------------------------------------------------

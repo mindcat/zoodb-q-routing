@@ -1,0 +1,11 @@
+node_id: basic_swap
+name: "Basic Swap (BSC)"
+paradigm: "Static (SWAP)"
+complexity: "O(n)"
+summary: |
+  The Basic Swap (BSC) algorithm represents the most straightforward and computationally inexpensive approach to resolving the physical connectivity constraints inherent in superconducting quantum hardware. When a non-adjacent operation is encountered, the strategy inserts SWAP gates along the shortest path connecting the two physical qubits involved.
+
+  Due to its conceptual simplicity and low computational overhead, Basic Swap is frequently utilized as a fallback or baseline method for comparison against more sophisticated routing algorithms. However, its decision-making process is purely local and greedy, prioritizing immediate execution over global circuit optimization.
+relations:
+  baselines:
+    - node_id: herr

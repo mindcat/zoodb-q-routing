@@ -1,27 +1,23 @@
 ---
-title: "About People DB"
+title: "About the Quantum Routing Zoo"
 tags:
   - 'allPages'
 ---
 
-# About this example website
+# About this project
 
-This is an example website created using the [ZooDb
-package](https://github.com/phfaist/zoodb).  It is not meant to serve any other
-purpose than to illustrate how to use this JavaScript library to build a simple
-website displaying information stored in a database of YAML files.
+The Quantum Routing Zoo is a structured database and catalog of quantum routing algorithms, transpilation heuristics, and hardware-specific compilation strategies. 
 
-You can edit the data files, or add additional data files, in the
-`zoodb/example/data` folder.  Go ahead and play around :)
+As quantum hardware scales in the NISQ era and beyond, efficient routing—mapping logical circuits to physical qubits while minimizing depth and error—has become a critical area of research. This site organizes these diverse algorithms by their underlying paradigms, computational complexities, and historical relationships to one another (such as which algorithms serve as baselines or improvements for others).
 
-This example website is powered by the wonderful [eleventy static website
-generator](https://11ty.dev/) and [parceljs bundler](https://parceljs.org/).
-Content template files can be written in HTML, JavaScript, Markdown, and more.
-Try it out!
+This project was created and is maintained by M. Elijah W., Yashar Khan, and Dr. Sonia Lopez-Alarcon.
 
+# How it works
+
+The underlying database is built using the open-source [ZooDb framework](https://github.com/phfaist/zoodb), which generates this site from a collection of easily readable, structured YAML files. The frontend is powered by the [Eleventy static site generator](https://11ty.dev/) and the [Parcel bundler](https://parceljs.org/).
+
+Because the data is entirely separated from the rendering logic, the database is highly extensible. You can easily contribute or play around with the data by editing or adding new YAML files in the `data/nodes` folder of the repository.
 
 # More information
 
-Check out the github repo at
-[https://github.com/phfaist/zoodb/](https://github.com/phfaist/zoodb/).
-
+To learn more about the database framework powering this site, check out the [ZooDb GitHub repository](https://github.com/phfaist/zoodb/).

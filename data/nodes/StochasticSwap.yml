@@ -1,0 +1,7 @@
+node_id: stochastic_swap
+name: "Stochastic Swap (STCH)"
+paradigm: "Static (SWAP)"
+summary: |
+  Stochastic Swap (STCH) is a heuristic strategy that focuses on maximizing parallelism and minimizing the circuit depth by optimizing SWAP insertion within contiguous layers of the quantum circuit. Rather than conducting an exhaustive, look-ahead search, Stochastic Swap employs random permutations to identify the optimal SWAP configuration exclusively for the current layer of executable gates.
+
+  This layer-restricted search inherently involves a trade-off, as the algorithm may fail to identify globally optimal solutions that might span multiple layers.

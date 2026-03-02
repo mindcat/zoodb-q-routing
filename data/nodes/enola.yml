@@ -1,0 +1,7 @@
+node_id: enola
+name: "Enola"
+paradigm: "Dynamic (NAQC)"
+summary: |
+  The Enola compilation framework represents the prior state-of-the-art for dynamically field-programmable neutral atom array processors~\cite{preset:enola_paper}. It addresses the challenge of mitigating the dominant error source in NAQCs by minimizing the total number of Rydberg stages required for circuit execution.
+
+  While solver-based approaches guarantee optimal results for small circuits, they suffer from fundamental scalability issues due to NP-complete runtime complexity. Enola overcame this by using a near-linear heuristic methodology. However, its movement scheme necessitates reverting the qubits to a predefined initial layout after each Rydberg stage, incurring substantial movement overhead.

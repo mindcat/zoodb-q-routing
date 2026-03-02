@@ -1,0 +1,7 @@
+node_id: sabre
+name: "SABRE (SWAP-based BidiREctional heuristic search)"
+paradigm: "Arbitrary (SWAP)"
+summary: |
+  SABRE was proposed to address the qubit mapping problem for Noisy Intermediate-Scale Quantum (NISQ) devices featuring arbitrary qubit connections. The primary objective of SABRE is to strike an efficient balance between minimizing the added CNOT gate count and optimizing the overall routing time.
+
+  A key design feature enhancing SABRE's performance is the utilization of a novel reverse traversal technique for generating a high-quality initial mapping. This procedure leverages the intrinsic reversibility of the qubit mapping problem, performing a forward circuit traversal, taking the final mapping achieved, and using it as the initial mapping for a subsequent reverse circuit traversal.

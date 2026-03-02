@@ -1,0 +1,10 @@
+node_id: herr
+name: "High Error Rate Routing (HERR)"
+paradigm: "Static (SWAP)"
+summary: |
+  High Error Rate Routing (HERR) is a representative example of a noise-aware routing algorithm that integrates real-time hardware characteristics into the routing decision process. The goal of HERR is to enhance circuit accuracy by actively identifying and routing around noisy physical links in the hardware topology, even if doing so necessitates the insertion of additional SWAP gates.
+
+  The mechanism of HERR is fundamentally an extension of Basic Swap~\cite{preset:herr_thesis}: it searches for a lower-error path between non-adjacent qubits, and if no such advantageous path exists, it defaults to the shortest path solution provided by the Basic Swap algorithm.
+relations:
+  improves_upon:
+    - node_id: basic_swap

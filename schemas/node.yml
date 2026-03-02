@@ -1,0 +1,101 @@
+$schema: "http://json-schema.org/draft-06/schema"
+
+type: object
+additionalProperties: false
+required: ["node_id", "name", "summary"]
+
+_zoo_primarykey: "node_id"
+
+_zoo_relations:
+  - object_field: "relations.baselines"
+    to_object_type: "node"
+    relation_primary_key_field: "node_id"
+    relation_add_object_field: "node"
+    backreference:
+      field: "relations.baseline_for"
+
+  - object_field: "relations.improves_upon"
+    to_object_type: "node"
+    relation_primary_key_field: "node_id"
+    relation_add_object_field: "node"
+    backreference:
+      field: "relations.improved_by"
+
+properties:
+  node_id:
+    type: string
+    pattern: "^[a-z0-9_.-]+$"
+    _single_line_string: true
+    _description: >-
+      An internal identifier for the routing algorithm. It must be unique across all algorithms.
+
+  name:
+    type: string
+    _flm: standalone
+    _single_line_string: true
+    _description: >-
+      The name of the algorithm. It is listed in multiple places, so don't make it too long.
+
+  paradigm:
+    type: string
+    _single_line_string: true
+    _description: >-
+      The routing paradigm or topology (e.g., Static (SWAP), Arbitrary (SWAP), Dynamic).
+
+  complexity:
+    type: string
+    _single_line_string: true
+    _description: >-
+      The computational time or space complexity of the algorithm.
+
+  summary:
+    type: string
+    _flm: full
+    _description: >-
+      A summary and explanation of the routing algorithm.
+
+  #
+  # Relations (e.g., algorithm lineage or comparisons):
+  #
+  relations:
+    type: object
+    additionalProperties: false
+    properties:
+      baselines:
+        type: array
+        items:
+          type: object
+          required: ["node_id"]
+          additionalProperties: false
+          properties:
+            node_id:
+              _single_line_string: true
+              type: string
+            node:
+              _auto_populated: true
+
+      improves_upon:
+        type: array
+        items:
+          type: object
+          required: ["node_id"]
+          additionalProperties: false
+          properties:
+            node_id:
+              _single_line_string: true
+              type: string
+            node:
+              _auto_populated: true
+
+      # automatically populated fields, don't specify manually
+      baseline_for:
+        _auto_populated: true
+        type: array
+        items:
+          type: object
+
+      improved_by:
+        _auto_populated: true
+        type: array
+        items:
+          type: object
