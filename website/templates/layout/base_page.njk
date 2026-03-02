@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>{{ page.title }}</title>
-<script type="module" src="~/website/stylesheets/mainstyle.js"></script>
+<title>{{ title }}</title>
+<link rel="stylesheet" href="{{ '/dynamic_style/flm.css' | url }}">
 {% include 'useMathjaxScript.njk' %}
 {{ include_extra_head_content | safe }}
 </head>
