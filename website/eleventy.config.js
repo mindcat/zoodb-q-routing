@@ -42,7 +42,7 @@ export default async function (eleventyConfig)
     eleventyConfig.addGlobalData("zoodb", async () => {
         return await load_zoodb({ data_dir });
     });
-    
+
     // building the zoo is pretty consequential, even incrementally, so don't
     // react right away but wait for a couple seconds first
     eleventyConfig.setWatchThrottleWaitTime(2000); // in milliseconds
@@ -116,6 +116,7 @@ export default async function (eleventyConfig)
     return {
         htmlTemplateEngine: "njk",
         markdownTemplateEngine: "njk",
+        pathPrefix: "/zoodb-q-routing/",
 
         dir: {
             input: 'src',
@@ -129,5 +130,3 @@ export default async function (eleventyConfig)
         jsDataFileSuffix: '.11tydata',
     };
 };
-
-
