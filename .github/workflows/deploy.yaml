@@ -25,25 +25,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "20"
 
-      # Install root dependencies (if any) and website dependencies
+      # Install dependencies using Yarn
       - name: Install dependencies
         run: |
-          npm install
+          yarn install
           cd website
-          npm install
+          yarn install
 
-      # Build the Eleventy/Parcel site
+      # Build the Eleventy/Parcel site using Yarn
       - name: Build site
         run: |
           cd website
-          npm run build
+          yarn run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './website/_site'
+          path: "./website/_site"
 
   deploy:
     environment:
