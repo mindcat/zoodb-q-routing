@@ -1,8 +1,7 @@
-
 import { render_html_standalone } from '@phfaist/zoodb/zooflm';
 
 const data = {
-    title: "People DB home",
+    title: "Quantum Routing Zoo Home", // <-- Updated title
     tags: [ 'allPages' ],
     eleventyComputed: {
         // ---
@@ -33,15 +32,15 @@ async function render(data)
     node_id_list.sort();
 
     for (const node_id of node_id_list) {
-        // If we'd like to render other properties of `node`, especial FLM
-        // content that is not marked as standalone-mode compatible, we should
-        // use `zooflm.make_and_render_document` with a render callback.
-
         const node = zoodb.objects.node[node_id];
-        const nodeHrefUrl = eleventy.hrefUrl(
-            zoodb.zoo_object_permalink('node', node_id)
-        );
-        const nodeName = render_html_standalone(zoodb.objects.node[node_id].name);
+
+        // Get the raw permalink from ZooDb
+        const rawPermalink = zoodb.zoo_object_permalink('node', node_id);
+
+        // Use Eleventy's built-in URL filter to safely apply the pathPrefix
+        const nodeHrefUrl = eleventy.url(rawPermalink);
+
+        const nodeName = render_html_standalone(node.name);
 
         content += `
 <li><a href="${ nodeHrefUrl }">${ nodeName }</a></li>
@@ -53,6 +52,5 @@ async function render(data)
 `;
     return content;
 };
-
 
 export default { data, render, };
