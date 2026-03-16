@@ -2,7 +2,23 @@ node_id: lookahead_swap
 name: "Lookahead Swap (LKHD)"
 paradigm: "Static (SWAP)"
 complexity: "Exponential"
+
+publication:
+  year: 2016
+  venue: "21st Asia and South Pacific Design Automation Conference (ASP-DAC)"
+  authors: "Wille, Keszocze, Walter, Rohrs, Chattopadhyay, Drechsler"
+  doi: "10.1109/ASPDAC.2016.7428026"
+  arxiv: null
+
 summary: |
   The Lookahead Swap (LKHD) algorithm is a heuristic approach designed to mitigate the fundamental weakness of greedy, local routing by predicting the impact of current SWAP choices on future circuit complexity. It selects the top N possible SWAP operations for the current gate and then recursively evaluates the potential benefit of these choices over M future steps.
 
-  While it effectively minimizes the anticipated need for future SWAPs, the primary limitation of Lookahead Swap is its prohibitively high computational complexity and resulting poor scalability.
+  While it effectively minimizes the anticipated need for future SWAPs, the primary limitation of Lookahead Swap is its prohibitively high computational complexity and resulting poor scalability. The necessity of generating N×M tentative circuit layouts per two-qubit gate decision causes exponential scaling with qubit count, rendering it infeasible for larger NISQ devices.
+
+relations:
+  improves_upon:
+    - node_id: basic_swap
+      note: "Adds multi-step lookahead to overcome purely greedy local decisions"
+  superseded_by:
+    - node_id: sabre
+      note: "SABRE achieves comparable or better quality with polynomial rather than exponential complexity"

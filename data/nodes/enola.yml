@@ -1,7 +1,23 @@
 node_id: enola
 name: "Enola"
 paradigm: "Dynamic (NAQC)"
-summary: |
-  The Enola compilation framework represents the prior state-of-the-art for dynamically field-programmable neutral atom array processors~\cite{preset:enola_paper}. It addresses the challenge of mitigating the dominant error source in NAQCs by minimizing the total number of Rydberg stages required for circuit execution.
 
-  While solver-based approaches guarantee optimal results for small circuits, they suffer from fundamental scalability issues due to NP-complete runtime complexity. Enola overcame this by using a near-linear heuristic methodology. However, its movement scheme necessitates reverting the qubits to a predefined initial layout after each Rydberg stage, incurring substantial movement overhead.
+publication:
+  year: 2025
+  venue: "30th Asia and South Pacific Design Automation Conference (ASP-DAC)"
+  authors: "Tan, Lin, Cong"
+  doi: "10.1145/3658617.3697778"
+  arxiv: null
+
+summary: |
+  The Enola compilation framework (efficient and near-optimal layout synthesizer for atom arrays) represents the prior state-of-the-art for dynamically field-programmable neutral atom array processors (DPQA). It addresses the challenge of mitigating the dominant error source in NAQCs by minimizing the total number of Rydberg stages required for circuit execution.
+
+  Enola's scheduler relates the DPQA scheduling problem to graph edge-coloring, employing the provably near-optimal Misra-Gries algorithm to assign gates to S_opt or S_opt+1 stages. While solver-based approaches guarantee optimal results for small circuits, they suffer from fundamental scalability issues due to NP-complete runtime complexity. Enola overcame this by using a near-linear heuristic methodology, enabling compilation of circuits up to 10,000 qubits. However, its movement scheme necessitates reverting the qubits to a predefined "home site" initial layout after each Rydberg stage, incurring substantial movement overhead and limiting efficient ZA integration.
+
+relations:
+  improves_upon:
+    - node_id: olsq_dpqa
+      note: "Achieves near-linear scalability vs. NP-complete SMT solver approach; 3.7x fewer two-qubit gate stages and 5.9x fidelity improvement on QAOA benchmarks"
+  superseded_by:
+    - node_id: powermove
+      note: "PowerMove eliminates the home-site revert overhead and fully integrates the Zoned Architecture"

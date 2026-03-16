@@ -1,7 +1,28 @@
 node_id: sabre
 name: "SABRE (SWAP-based BidiREctional heuristic search)"
 paradigm: "Arbitrary (SWAP)"
+complexity: "O(N^2.5 * g) per two-qubit gate"
+
+publication:
+  year: 2019
+  venue: "arXiv / ASPLOS"
+  authors: "Li, Ding, Xie"
+  arxiv: "1809.02573"
+  doi: null
+
 summary: |
   SABRE was proposed to address the qubit mapping problem for Noisy Intermediate-Scale Quantum (NISQ) devices featuring arbitrary qubit connections. The primary objective of SABRE is to strike an efficient balance between minimizing the added CNOT gate count and optimizing the overall routing time.
 
-  A key design feature enhancing SABRE's performance is the utilization of a novel reverse traversal technique for generating a high-quality initial mapping. This procedure leverages the intrinsic reversibility of the qubit mapping problem, performing a forward circuit traversal, taking the final mapping achieved, and using it as the initial mapping for a subsequent reverse circuit traversal.
+  A key design feature enhancing SABRE's performance is the utilization of a novel reverse traversal technique for generating a high-quality initial mapping. This procedure leverages the intrinsic reversibility of the qubit mapping problem, performing a forward circuit traversal, taking the final mapping achieved, and using it as the initial mapping for a subsequent reverse circuit traversal. SABRE's heuristic cost function also incorporates a decay effect to control SWAP parallelism, enabling a tunable trade-off between gate count and circuit depth (~8% depth variation observed).
+
+relations:
+  improves_upon:
+    - node_id: lookahead_swap
+      note: "Reduces search complexity from exponential to O(N^2.5*g); scalable to large NISQ devices"
+    - node_id: basic_swap
+      note: "Consistently produces lower CNOT counts and circuit depth than BSC"
+  baselines:
+    - node_id: light_sabre
+      note: "LightSABRE directly extends and benchmarks against SABRE"
+    - node_id: rl_heuristics
+      note: "RL heuristics adapt SABRE's structure but replace its cost function with a learned policy"

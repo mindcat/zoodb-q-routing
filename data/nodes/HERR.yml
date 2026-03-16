@@ -1,10 +1,27 @@
 node_id: herr
 name: "High Error Rate Routing (HERR)"
 paradigm: "Static (SWAP)"
+
+publication:
+  year: 2022
+  venue: "RIT Master's Thesis"
+  authors: "Bonaventure"
+  thesis_url: "https://repository.rit.edu/theses/11205/"
+  doi: null
+  arxiv: null
+
 summary: |
   High Error Rate Routing (HERR) is a representative example of a noise-aware routing algorithm that integrates real-time hardware characteristics into the routing decision process. The goal of HERR is to enhance circuit accuracy by actively identifying and routing around noisy physical links in the hardware topology, even if doing so necessitates the insertion of additional SWAP gates.
 
-  The mechanism of HERR is fundamentally an extension of Basic Swap~\cite{preset:herr_thesis}: it searches for a lower-error path between non-adjacent qubits, and if no such advantageous path exists, it defaults to the shortest path solution provided by the Basic Swap algorithm.
+  The mechanism of HERR is fundamentally an extension of Basic Swap: it searches for a lower-error path between non-adjacent qubits, and if no such advantageous path exists, it defaults to the shortest path solution provided by the Basic Swap algorithm. HERR's noise thresholds can be dynamically adjusted based on current quantum calibration data, making it most effective in niche scenarios involving high-occupancy circuits and devices with a limited number of high-error "bad links."
+
 relations:
+  extends:
+    - node_id: basic_swap
+      note: "Mechanistically a superset of BSC; falls back to BSC when no lower-error path exists"
   improves_upon:
     - node_id: basic_swap
+      note: "Incorporates link-level noise awareness absent in BSC"
+  inspired_by:
+    - node_id: sabre
+      note: "Researchers view HERR as a stepping stone toward noise-aware integration into scalable algorithms like SABRE"

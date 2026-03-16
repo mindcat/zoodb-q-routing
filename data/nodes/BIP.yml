@@ -1,0 +1,24 @@
+node_id: bip
+name: "BIP Mapping (Binary Integer Programming)"
+paradigm: "Arbitrary (SWAP)"
+complexity: "NP-hard"
+
+publication:
+  year: 2021
+  venue: "arXiv"
+  authors: "Nannicini, Bishop, Gunluk, Jurcevic"
+  arxiv: "2106.06446"
+  doi: null
+
+summary: |
+  Binary Integer Programming (BIP) Mapping represents a class of solver-based methods designed to find optimal or near-optimal solutions to the qubit assignment and routing problem by modeling it as a mathematical optimization challenge. The core formulation converts both initial qubit allocation and subsequent SWAP insertion into a set of linear constraints and a binary objective function, allowing the problem to be solved to global optimality for smaller circuit sizes.
+
+  A significant feature of BIP is its ability to model subtle hardware effects with high fidelity—for instance, distinguishing a SWAP requiring three CNOTs from one that can be merged with an adjacent gate. BIP reduces CNOT count by approximately 10–14% and circuit duration by approximately 20–25% compared to SABRE, and produces circuits with higher Heavy Output Probability (HOP) on real hardware. Its primary limitation is scalability: the NP-hard formulation restricts provably optimal solutions to single-digit qubit counts, with larger circuits (e.g., 8+ qubits) requiring heuristic time-bounded solver runs.
+
+relations:
+  improves_upon:
+    - node_id: sabre
+      note: "Achieves ~10-14% lower CNOT count and ~20-25% lower circuit duration; higher HOP on hardware"
+  superseded_by:
+    - node_id: rl_heuristics
+      note: "RL heuristics achieve near-BIP quality at SABRE-level runtime, making BIP's scalability limitations moot for large circuits"

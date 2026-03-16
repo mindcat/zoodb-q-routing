@@ -1,0 +1,23 @@
+node_id: s_sync
+name: "S-SYNC (Shuttle and Swap Co-Optimization)"
+paradigm: "Dynamic (Trapped-Ion / QCCD)"
+
+publication:
+  year: 2025
+  venue: "52nd Annual International Symposium on Computer Architecture (ISCA '25)"
+  authors: "Zhu, Wu, Wang, Wang"
+  doi: "10.1145/3695053.3731084"
+  arxiv: null
+
+summary: |
+  S-SYNC is a co-optimization framework for trapped-ion Quantum Charge-Coupled Device (QCCD) architectures, which leverage ion shuttling to dynamically reconfigure qubit connectivity. Rather than treating shuttling and SWAP-based routing as independent problems, S-SYNC models ion shuttling operations as a form of SWAP, enabling unified co-optimization of both mechanisms.
+
+  This unified model allows the compiler to make holistic decisions about when to shuttle ions versus insert SWAP gates, minimizing decoherence errors from unnecessary ion movement while reducing gate overhead. S-SYNC is architecturally analogous to PowerMove in its focus on dynamic-topology compilation for non-superconducting hardware, but addresses the distinct physical constraints of the QCCD architecture (linear ion chains, junction routing, shuttling latency) rather than the reconfigurable 2D atom arrays of NAQCs.
+
+relations:
+  inspired_by:
+    - node_id: sabre
+      note: "Models shuttling as SWAP, borrowing SABRE's foundational abstraction of qubit-state permutation as the primitive routing operation"
+  contemporaneous_with:
+    - node_id: powermove
+      note: "Both published in 2025 and address dynamic-topology compilation for non-superconducting architectures; solve analogous problems for QCCD (S-SYNC) vs. NAQC/ZA (PowerMove)"

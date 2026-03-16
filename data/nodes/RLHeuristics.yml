@@ -1,0 +1,26 @@
+node_id: rl_heuristics
+name: "RL Heuristics (Reinforcement Learning for Routing)"
+paradigm: "Arbitrary (SWAP)"
+
+publication:
+  year: 2025
+  venue: "arXiv"
+  authors: "Kremer, Villar, Paik, Duran, Faro, Cruz-Benito"
+  arxiv: "2405.13196"
+  doi: null
+
+summary: |
+  RL Heuristics frames the circuit routing task as a sequential decision-making process, replacing traditional handcrafted heuristic cost functions with policies learned by an AI agent through trial and error. The motivation is to bridge the gap between slow exact methods (SAT solvers, BIP) and fast but sub-optimal heuristics like SABRE, achieving near-optimal quality at practical runtime.
+
+  The RL agent adapts the structural framework of SABRE but substitutes its heuristic cost function with a learned policy. The reward function penalizes increases in two-qubit gate count and circuit depth while providing positive rewards for successful circuit completion—and reduced penalties when a SWAP leads to gate cancellation or merging with an existing CNOT. On large circuits up to 133 qubits, RL achieves ~40% reduction in two-qubit gate depth and ~10% lower gate count versus Qiskit SDK 1.0 level 3 transpilers. For large-scale routing (up to 900 qubits, 1M two-qubit gates), RL methods yield results at least ~30% better in depth and gate count versus other heuristics.
+
+relations:
+  extends:
+    - node_id: sabre
+      note: "Structurally adapts SABRE's DAG-layer framework but replaces its handcrafted cost function with a learned heuristic"
+  improves_upon:
+    - node_id: sabre
+      note: "~40% depth reduction and ~10% gate count reduction on large circuits while maintaining comparable runtime"
+  inspired_by:
+    - node_id: bip
+      note: "Motivated by the optimality achievable via BIP but targeting scalability BIP cannot provide"
