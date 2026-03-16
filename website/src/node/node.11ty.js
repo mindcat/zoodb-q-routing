@@ -19,8 +19,10 @@ async function data()
         date: '2000-01-01', // should be ignored
         tags: ['allPages', 'node'], // <-- Changed from person
         eleventyComputed: {
-            permalink: (data) =>
-                data.zoodb.zoo_object_permalink('node', data.node.node_id) + '.html',
+            permalink: (data) => {
+                const rawPath = data.zoodb.zoo_object_permalink('node', data.node.node_id);
+                return rawPath.replace('/zoodb-q-routing', '') + '.html';
+            },
             title: (data) => render_text_standalone(data.node.name),
 
             node_name: (data) => render_text_standalone(data.node.name),

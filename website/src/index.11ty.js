@@ -38,7 +38,8 @@ async function render(data)
         const rawPermalink = zoodb.zoo_object_permalink('node', node_id);
 
         // Use Eleventy's built-in URL filter to safely apply the pathPrefix
-        const nodeHrefUrl = eleventy.url(rawPermalink);
+        // const nodeHrefUrl = eleventy.url(rawPermalink);
+        const nodeHrefUrl = rawPermalink;
 
         const nodeName = render_html_standalone(node.name);
 
