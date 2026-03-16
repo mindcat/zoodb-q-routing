@@ -89,7 +89,7 @@ export default async function (eleventyConfig)
                 parcelOptions: {
                     // parcel paths to include -- configered in ./package.json ->
                     entries: packageJson.config.siteLandingPaths,
-                    defaultConfig: "@parcel/config-default",
+                    // defaultConfig: "@parcel/config-default",
                     shouldDisableCache: true,
                     shouldAutoInstall: true,
                     serveOptions: {
@@ -98,12 +98,14 @@ export default async function (eleventyConfig)
                     hmrOptions: {
                         port: 3001,
                     },
-
                     // build only the pages/modules that were requested --- should
                     // only set to true in watch/dev mode, need to set to false
                     // otherwise.
                     shouldBuildLazily: false,
 
+                    defaultTargetOptions: {
+                        publicUrl: "/zoodb-q-routing/"
+                    }
                 },
                 useMiddleware: true,
                 middlewareOptions: {
