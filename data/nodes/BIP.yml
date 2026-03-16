@@ -9,16 +9,17 @@ publication:
   authors: "Nannicini, Bishop, Gunluk, Jurcevic"
   arxiv: "2106.06446"
   doi: null
+  note: null
 
 summary: |
   Binary Integer Programming (BIP) Mapping represents a class of solver-based methods designed to find optimal or near-optimal solutions to the qubit assignment and routing problem by modeling it as a mathematical optimization challenge. The core formulation converts both initial qubit allocation and subsequent SWAP insertion into a set of linear constraints and a binary objective function, allowing the problem to be solved to global optimality for smaller circuit sizes.
 
-  A significant feature of BIP is its ability to model subtle hardware effects with high fidelity—for instance, distinguishing a SWAP requiring three CNOTs from one that can be merged with an adjacent gate. BIP reduces CNOT count by approximately 10–14% and circuit duration by approximately 20–25% compared to SABRE, and produces circuits with higher Heavy Output Probability (HOP) on real hardware. Its primary limitation is scalability: the NP-hard formulation restricts provably optimal solutions to single-digit qubit counts, with larger circuits (e.g., 8+ qubits) requiring heuristic time-bounded solver runs.
+  A significant feature of BIP is its ability to model subtle hardware effects with high fidelity — for instance, distinguishing a SWAP requiring three CNOTs from one that can be merged with an adjacent gate. BIP reduces CNOT count by approximately 10-14% and circuit duration by approximately 20-25% compared to SABRE, and produces circuits with higher Heavy Output Probability (HOP) on real hardware. Its primary limitation is scalability: the NP-hard formulation restricts provably optimal solutions to single-digit qubit counts, with larger circuits (8+ qubits) requiring heuristic time-bounded solver runs. RL Heuristics (2025) later achieved near-BIP quality at SABRE-level runtime, making BIP's scalability limitations moot for large circuits.
 
 relations:
   improves_upon:
     - node_id: sabre
-      note: "Achieves ~10-14% lower CNOT count and ~20-25% lower circuit duration; higher HOP on hardware"
+      note: "Achieves ~10-14% lower CNOT count and ~20-25% lower circuit duration; higher HOP on hardware — at the cost of NP-hard scalability."
   superseded_by:
     - node_id: rl_heuristics
-      note: "RL heuristics achieve near-BIP quality at SABRE-level runtime, making BIP's scalability limitations moot for large circuits"
+      note: "RL heuristics achieve near-BIP quality at SABRE-level runtime, making BIP's scalability limitations moot for large circuits."

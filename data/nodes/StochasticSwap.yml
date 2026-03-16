@@ -5,19 +5,20 @@ paradigm: "Static (SWAP)"
 publication:
   year: null
   venue: null
-  note: "Foundational Qiskit heuristic; no standalone origin paper. Widely used as a depth-optimizing baseline in Qiskit's transpilation pipeline."
+  authors: null
   arxiv: null
   doi: null
+  note: "Foundational Qiskit heuristic; no standalone origin paper. Widely used as a depth-optimizing baseline in Qiskit's transpilation pipeline."
 
 summary: |
-  Stochastic Swap (STCH) is a heuristic strategy that focuses on maximizing parallelism and minimizing the circuit depth by optimizing SWAP insertion within contiguous layers of the quantum circuit. Rather than conducting an exhaustive, look-ahead search, Stochastic Swap employs random permutations to identify the optimal SWAP configuration exclusively for the current layer of executable gates.
+  Stochastic Swap (STCH) is a heuristic strategy that focuses on maximizing parallelism and minimizing circuit depth by optimizing SWAP insertion within contiguous layers of the quantum circuit. Rather than conducting an exhaustive look-ahead search, STCH employs random permutations to identify the optimal SWAP configuration exclusively for the current layer of executable gates, exploiting layer parallelism to minimize temporal circuit length.
 
-  This layer-restricted search inherently involves a trade-off, as the algorithm may fail to identify globally optimal solutions that might span multiple layers. Despite introducing more total CNOT gates than SABRE, STCH frequently achieves competitive circuit depth through high layer density, making it attractive for depth-critical future hardware.
+  The layer-restricted search involves an inherent trade-off: restricting optimization to a single layer means the algorithm may fail to identify globally optimal solutions spanning multiple layers. This is reflected in experimental data — STCH typically inserts more CNOT gates than SABRE, which prioritizes gate count reduction. However, its depth-focused design means it frequently achieves competitive circuit depth against SABRE due to high layer density, organizing added CNOTs into parallel operations. This makes STCH potentially attractive for future depth-critical hardware. STCH shares the motivation of Lookahead Swap — looking beyond the immediate gate — but restricts its scope to single layers for tractability.
 
 relations:
   improves_upon:
     - node_id: basic_swap
-      note: "Explicitly targets circuit depth via layer parallelism rather than purely greedy shortest-path insertion"
+      note: "Explicitly targets circuit depth via layer parallelism rather than purely greedy shortest-path insertion."
   inspired_by:
     - node_id: lookahead_swap
-      note: "Shares the motivation of looking beyond the immediate gate, but restricts scope to single layers for tractability"
+      note: "Shares the motivation of looking beyond the immediate gate, but restricts scope to a single layer for tractability."

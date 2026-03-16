@@ -8,19 +8,22 @@ publication:
   authors: "Ruan, Fang, Zhang, Li, Humble, Ding"
   arxiv: "2411.12263"
   doi: null
+  note: null
 
 summary: |
-  PowerMove is an optimizing compilation framework specifically designed for Neutral Atom Quantum Computers (NAQCs) that utilize a Zoned Architecture (ZA). PowerMove addresses the distinct challenges of NAQCs, which feature advanced capabilities such as collective qubit movement.
+  PowerMove is an optimizing compilation framework specifically designed for Neutral Atom Quantum Computers (NAQCs) that utilize a Zoned Architecture (ZA). It addresses the distinct challenges of NAQCs, which feature advanced capabilities such as collective qubit movement, by integrating three specialized components: the Stage Scheduler, Continuous Router, and Coll-Move Scheduler.
 
-  Central to its innovation is the Continuous Router, which integrates qubit allocation and movement decisions to facilitate direct transitions between required layouts for subsequent stages, eliminating the costly "home-site revert" overhead of prior compilers like Enola. The framework integrates three specialized components: the Stage Scheduler (minimizes inter-zone qubit interchange between consecutive CZ stages), the Continuous Router (enables fully dynamic layout transitions), and the Coll-Move Scheduler (parallelizes collective movements via multiple AOD arrays to suppress decoherence). Benchmarks indicate PowerMove provides execution time reductions of 2.03×–3.76× and compilation time reductions up to 216.9× versus Enola, with fidelity improvements of several orders of magnitude on large-scale benchmarks.
+  Central to its innovation is the Continuous Router, which integrates qubit allocation and movement decisions to facilitate direct transitions between required layouts for subsequent stages. This eliminates the costly "home-site revert" overhead of prior compilers like Enola, which required reverting to a predefined initial layout after each Rydberg stage. The Stage Scheduler minimizes inter-zone qubit interchange between consecutive CZ stages, and the Coll-Move Scheduler parallelizes collective movements (Coll-Moves) via multiple AOD arrays, prioritizing operations that move qubits into the storage zone to maximize dwell time and suppress decoherence. PowerMove is also the first compiler to integrate the storage zone, effectively eliminating excitation errors from the Rydberg laser for non-interacting qubits.
+
+  Benchmarks indicate execution time reductions of 2.03x-3.76x, compilation time reductions up to 216.9x versus Enola, and fidelity improvements of several orders of magnitude on large-scale benchmarks (e.g., fidelity of 0.75 vs. Enola's 2.2e-4 on a 70-qubit BV benchmark). The framework extends to the fault-tolerant quantum computing (FTQC) setting, achieving 4.78x-5.47x execution time reductions on surface code benchmarks.
 
 relations:
   improves_upon:
     - node_id: enola
-      note: "Eliminates home-site reversion overhead; first compiler to fully integrate ZA storage zone"
+      note: "Eliminates home-site reversion overhead; first compiler to fully integrate ZA storage zone; orders-of-magnitude fidelity improvements on large benchmarks."
   extends:
     - node_id: enola
-      note: "Builds on Enola's edge-coloring stage partition concept; replaces its routing and placement modules"
+      note: "Builds on Enola's edge-coloring stage partition concept; replaces its placement and routing modules with continuous routing and ZA-aware scheduling."
   inspired_by:
     - node_id: sabre
-      note: "Continuous Router's qubit-labeling and greedy stage-selection logic is philosophically analogous to SABRE's heuristic cost function approach"
+      note: "Continuous Router's greedy qubit-labeling and stage-selection logic is philosophically analogous to SABRE's heuristic cost function approach to SWAP selection."

@@ -4,40 +4,24 @@ paradigm: "Arbitrary (SWAP)"
 
 publication:
   year: 2024
-  venue: "arXiv (submitted Sept 2024; implemented iteratively in Qiskit 0.20.1–1.2.0)"
+  venue: "arXiv (implemented iteratively in Qiskit 0.20.1-1.2.0)"
   authors: "Zou, Treinish, Hartman, Ivrii, Lishman"
   institution: "IBM Quantum"
   arxiv: "2409.08368"
   doi: null
+  note: null
 
 summary: |
-  LightSABRE is a substantially enhanced version of SABRE developed iteratively within Qiskit, targeting both runtime efficiency and circuit quality for modern quantum hardware. By Qiskit 1.2.0, LightSABRE is approximately 200× faster than the Qiskit 0.20.1 SABRE implementation, driven primarily by porting the core algorithm to Rust (first introduced in Qiskit 0.22.4). Across benchmark circuits, LightSABRE achieves an average 18.9% reduction in SWAP gate count compared to original SABRE.
+  LightSABRE is a substantially enhanced version of SABRE developed iteratively within Qiskit, targeting both runtime efficiency and circuit quality for modern quantum hardware. By Qiskit 1.2.0, LightSABRE is approximately 200x faster than the Qiskit 0.20.1 SABRE implementation, driven primarily by porting the core algorithm to Rust (first introduced at Qiskit 0.22.4). Across benchmark circuits, LightSABRE achieves an average 18.9% reduction in SWAP gate count compared to original SABRE.
 
-  The core algorithmic improvements are:
+  The core algorithmic improvements are: (1) Relative Scoring — rather than recomputing the full SABRE heuristic for every candidate SWAP at Theta(|F|^2), LightSABRE evaluates only the relative change each SWAP induces in O(1) terms, reducing best-swap selection to Theta(|F|). (2) Multiple Trials — parallel routing trials with different random seeds, selecting the highest-quality output, converting SABRE's nondeterminism from liability to search advantage. (3) Seeded Initial Layout — VF2Layout checks for perfect subgraph embedding; SabrePreLayout extends this to "almost-perfect" layouts via distance-2 graph augmentation and subgraph isomorphism. (4) Disjoint Connectivity Graphs — explicit handling for modular multi-QPU architectures or topologies with filtered faulty qubits, routing each connected component independently. (5) Classical Control Flow — recursive routing of mid-circuit if-else branches, with SWAP epilogues appended to realign branch-final layouts and preserve SABRE's lookahead across control flow boundaries. (6) Heuristic Enhancements — two new optional cost function terms: a depth component (D*delta_depth/3, penalizing SWAPs that increase 2Q gate depth) and a critical path component (alpha^r_gate, upweighting SWAPs that unblock high-descendant-count gates). (7) Release Valve — addresses SABRE's known local-minimum failure mode by backtracking to the last routed gate and using Dijkstra's algorithm to greedily escape; zero runtime cost when not triggered.
 
-  1. Relative Scoring: Rather than recomputing the full SABRE heuristic H for every candidate SWAP (complexity Θ(|F|²)), LightSABRE evaluates only the relative change each SWAP induces. Since a single SWAP affects O(1) terms in the heuristic, best-swap selection is reduced from Θ(|F|²) to Θ(|F|).
-
-  2. Multiple Trials: LightSABRE runs multiple parallel routing trials with different random seeds and selects the highest-quality output. This directly exploits SABRE's nondeterminism, converting variance from a liability into a search advantage. Layout and routing trials are run separately to avoid conflating their objective functions.
-
-  3. Seeded Initial Layout: In addition to random initial mappings, LightSABRE seeds trials with structured starting layouts. The VF2Layout pass checks for perfect subgraph embedding (requiring zero routing); SabrePreLayout extends this to "almost-perfect" layouts by augmenting the connectivity graph with distance-2 edges and solving a relaxed subgraph isomorphism problem.
-
-  4. Disjoint Connectivity Graphs: LightSABRE explicitly handles hardware with disjoint connectivity (e.g., modular multi-QPU architectures, or topologies with filtered faulty qubits). Circuit and hardware connected components are identified and matched greedily before independent per-component layout and routing.
-
-  5. Classical Control Flow: LightSABRE routes circuits containing mid-circuit measurements and classical if-else branching. Each branch is routed recursively with the outer circuit's layout at the time of the control flow operation. An epilogue of SWAPs is appended to each branch to realign all branch-final layouts, preserving SABRE's lookahead across control flow boundaries.
-
-  6. Heuristic Enhancements: Two new optional terms extend SABRE's basic + lookahead cost function:
-     - Depth component: penalizes SWAPs that increase 2-qubit gate depth (D·Δdepth/3), at the cost of additional runtime for depth tracking.
-     - Critical path component: upweights SWAPs that unblock high-descendant-count gates (α^r_gate), effective when a circuit has a well-defined critical path.
-     No single heuristic dominates across all circuit types; the depth heuristic tends to provide the best depth–swap tradeoff for QFT-style circuits.
-
-  7. Release Valve: Addresses a known failure mode where SABRE's lookahead heuristic gets stuck in a local minimum indefinitely. LightSABRE tracks SWAPs since the last routed gate; if a threshold is exceeded, it backtracks to that state and uses Dijkstra's algorithm to greedily route the nearest front-layer gate. Designed to have zero runtime cost when not triggered.
-
-  Scaling benchmarks on Bernstein-Vazirani circuits up to 19,998 qubits on a 142×142 grid confirm practical runtime scaling for near-term systems with thousands of qubits.
+  Scaling benchmarks on Bernstein-Vazirani circuits up to 19,998 qubits on a 142x142 grid confirm practical runtime scaling for near-term systems with thousands of qubits.
 
 relations:
   extends:
     - node_id: sabre
-      note: "Retains SABRE's DAG-layer framework, bidirectional traversal, and heuristic cost function. All seven improvement areas are backward-compatible extensions of SABRE's core design."
+      note: "Retains SABRE's DAG-layer framework, bidirectional traversal, and heuristic cost function. All seven improvements are backward-compatible extensions of SABRE's core design."
   improves_upon:
     - node_id: sabre
-      note: "~200× faster runtime (Qiskit 0.20.1→1.2.0); 18.9% average SWAP reduction; adds control flow support, disjoint graph handling, and release valve that original SABRE lacks entirely."
+      note: "~200x faster runtime (Qiskit 0.20.1 to 1.2.0); 18.9% average SWAP reduction; adds control flow support, disjoint graph handling, and release valve that original SABRE lacks entirely."

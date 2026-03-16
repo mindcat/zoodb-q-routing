@@ -7,18 +7,19 @@ publication:
   year: 2016
   venue: "21st Asia and South Pacific Design Automation Conference (ASP-DAC)"
   authors: "Wille, Keszocze, Walter, Rohrs, Chattopadhyay, Drechsler"
-  doi: "10.1109/ASPDAC.2016.7428026"
   arxiv: null
+  doi: "10.1109/ASPDAC.2016.7428026"
+  note: null
 
 summary: |
-  The Lookahead Swap (LKHD) algorithm is a heuristic approach designed to mitigate the fundamental weakness of greedy, local routing by predicting the impact of current SWAP choices on future circuit complexity. It selects the top N possible SWAP operations for the current gate and then recursively evaluates the potential benefit of these choices over M future steps.
+  The Lookahead Swap (LKHD) algorithm is a heuristic approach designed to mitigate the fundamental weakness of greedy, local routing by predicting the impact of current SWAP choices on future circuit complexity. After establishing an initial mapping via a DAG that maximizes early qubit reuse, the algorithm selects the top N possible SWAP operations for the current gate and recursively evaluates their benefit over M future steps, selecting the choice that minimizes anticipated future SWAPs.
 
-  While it effectively minimizes the anticipated need for future SWAPs, the primary limitation of Lookahead Swap is its prohibitively high computational complexity and resulting poor scalability. The necessity of generating N×M tentative circuit layouts per two-qubit gate decision causes exponential scaling with qubit count, rendering it infeasible for larger NISQ devices.
+  Despite its advanced optimization goal, the primary limitation is prohibitively high computational complexity. Generating N×M tentative circuit layouts per two-qubit gate decision yields exponential scaling with qubit count, rendering LKHD infeasible for practical use on larger NISQ devices. Benchmarking shows transpilation time orders of magnitude slower than SABRE and Basic Swap. Although LKHD rivals SABRE and STCH on quality metrics for small circuits, its complexity effectively restricts it to circuits with a minimal qubit count. SABRE (2019) later achieved comparable or better quality at polynomial complexity, effectively superseding LKHD for practical use.
 
 relations:
   improves_upon:
     - node_id: basic_swap
-      note: "Adds multi-step lookahead to overcome purely greedy local decisions"
+      note: "Adds multi-step lookahead to overcome BSC's purely greedy local decisions, reducing anticipated future SWAP count."
   superseded_by:
     - node_id: sabre
-      note: "SABRE achieves comparable or better quality with polynomial rather than exponential complexity"
+      note: "SABRE achieves comparable or better quality with polynomial rather than exponential complexity, making LKHD impractical beyond small circuits."

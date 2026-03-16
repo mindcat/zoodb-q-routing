@@ -1,28 +1,22 @@
 node_id: olsq_dpqa
-name: "OLSQ-DPQA (Optimal Layout Synthesis for Quantum Computing — DPQA)"
+name: "OLSQ-DPQA"
 paradigm: "Dynamic (NAQC)"
 complexity: "NP-complete (SMT solver)"
 
 publication:
-  year_v1: 2022
-  year_v2: 2024
-  venue_v1: "41st IEEE/ACM International Conference on Computer-Aided Design (ICCAD '22)"
-  venue_v2: "Quantum, vol. 8"
+  year: 2022
+  venue: "ICCAD '22 (v1); Quantum vol.8 (v2, 2024)"
   authors: "Tan, Bluvstein, Lukin, Cong"
-  doi_v1: "10.1145/3508352.3549331"
-  doi_v2: "10.22331/q-2024-03-14-1281"
   arxiv: null
-  note: "v1 (2022) introduced OLSQ for reconfigurable atom arrays; v2 (2024) extended to DPQA with full neutral atom treatment."
+  doi: "10.1145/3508352.3549331"
+  note: "v1 (ICCAD '22, DOI:10.1145/3508352.3549331) introduced OLSQ for reconfigurable atom arrays; v2 (Quantum 2024, DOI:10.22331/q-2024-03-14-1281) extended to full DPQA treatment."
 
 summary: |
-  OLSQ-DPQA (Optimal Layout Synthesis for Quantum Computing — Dynamically Field-Programmable Qubit Arrays) applies Satisfiability Modulo Theories (SMT) solvers to the NAQC compilation problem, attempting to find globally optimal qubit layouts and movement schedules for neutral atom array processors.
+  OLSQ-DPQA (Optimal Layout Synthesis for Quantum Computing — Dynamically Field-Programmable Qubit Arrays) applies Satisfiability Modulo Theories (SMT) solvers to the NAQC compilation problem, attempting to find globally optimal qubit layouts and movement schedules for neutral atom array processors. By formulating scheduling, placement, and routing as a set of logical constraints, OLSQ-DPQA can guarantee optimality for small circuits.
 
-  By formulating the scheduling, placement, and routing problem as a set of logical constraints, OLSQ-DPQA can guarantee optimality for small circuits. However, its reliance on NP-complete SMT solving creates fundamental scalability barriers: it times out on circuits with as few as 90 qubits, making it impractical for larger benchmarks. This scalability failure directly motivated the development of Enola, which replaced the solver with a near-linear heuristic while maintaining near-optimal stage counts.
+  Its reliance on NP-complete SMT solving creates fundamental scalability barriers: OLSQ-DPQA times out on circuits with as few as 90 qubits, making it impractical for larger benchmarks. This scalability failure directly motivated the development of Enola, which replaced the solver with a near-linear heuristic while maintaining near-optimal stage counts. Enola achieved 3.7x fewer two-qubit gate stages and 5.9x fidelity improvement on QAOA benchmarks compared to OLSQ-DPQA.
 
 relations:
   superseded_by:
     - node_id: enola
-      note: "Enola achieves near-linear scalability (up to 10,000 qubits) versus OLSQ-DPQA timing out at ~90 qubits; 3.7x fewer gate stages and 5.9x fidelity gain on QAOA benchmarks"
-  inspired_by:
-    - node_id: sabre
-      note: "Shares the motivation of globally-aware layout optimization over greedy heuristics; applies this philosophy to the NAQC/DPQA domain"
+      note: "Enola achieves near-linear scalability (up to 10,000 qubits) vs. OLSQ-DPQA timing out at ~90 qubits; 3.7x fewer gate stages and 5.9x fidelity gain on QAOA benchmarks."

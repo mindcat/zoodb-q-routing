@@ -9,20 +9,16 @@ publication:
   authors: "Li, Ding, Xie"
   arxiv: "1809.02573"
   doi: null
+  note: null
 
 summary: |
-  SABRE was proposed to address the qubit mapping problem for Noisy Intermediate-Scale Quantum (NISQ) devices featuring arbitrary qubit connections. The primary objective of SABRE is to strike an efficient balance between minimizing the added CNOT gate count and optimizing the overall routing time.
+  SABRE was proposed to address the qubit mapping problem for Noisy Intermediate-Scale Quantum (NISQ) devices featuring arbitrary qubit connections. Its primary objective is to strike an efficient balance between minimizing added CNOT gate count and optimizing overall routing time. SABRE generates a DAG for the input circuit, partitions it into layers, and inserts SWAPs using a heuristic cost function restricted to qubits near the current front layer. This provides an exponential speedup over exhaustive search, reducing complexity from O(exp(N)) to O(N^2.5*g) per two-qubit gate.
 
-  A key design feature enhancing SABRE's performance is the utilization of a novel reverse traversal technique for generating a high-quality initial mapping. This procedure leverages the intrinsic reversibility of the qubit mapping problem, performing a forward circuit traversal, taking the final mapping achieved, and using it as the initial mapping for a subsequent reverse circuit traversal. SABRE's heuristic cost function also incorporates a decay effect to control SWAP parallelism, enabling a tunable trade-off between gate count and circuit depth (~8% depth variation observed).
+  A key design feature is the reverse traversal technique for generating a high-quality initial mapping: a forward traversal is performed, the final mapping is taken, and used as the initial mapping for a subsequent reverse traversal. This provides global optimization by considering all circuit gates, significantly reducing routing overhead. SABRE also introduces a decay effect in its cost function to control SWAP parallelism, enabling a tunable trade-off between total gate count and circuit depth (~8% depth variation observed). SABRE consistently leads in CNOT count reduction and routing time, establishing it as the dominant baseline for subsequent algorithms: LightSABRE extends it directly, and RL Heuristics replaces its cost function with a learned policy.
 
 relations:
   improves_upon:
     - node_id: lookahead_swap
-      note: "Reduces search complexity from exponential to O(N^2.5*g); scalable to large NISQ devices"
+      note: "Reduces search complexity from exponential to O(N^2.5*g); scalable to large NISQ devices where LKHD times out."
     - node_id: basic_swap
-      note: "Consistently produces lower CNOT counts and circuit depth than BSC"
-  baselines:
-    - node_id: light_sabre
-      note: "LightSABRE directly extends and benchmarks against SABRE"
-    - node_id: rl_heuristics
-      note: "RL heuristics adapt SABRE's structure but replace its cost function with a learned policy"
+      note: "Consistently produces lower CNOT counts and circuit depth than BSC across all benchmarks."
