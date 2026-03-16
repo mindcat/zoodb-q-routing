@@ -19,7 +19,7 @@ summary: |
 relations:
   improves_upon:
     - node_id: sabre
-      note: "Achieves ~10-14\% lower CNOT count and ~20-25\% lower circuit duration; higher HOP on hardware — at the cost of NP-hard scalability."
+      note: "Achieves ~10-14 percent lower CNOT count and ~20-25 percent lower circuit duration; higher HOP on hardware — at the cost of NP-hard scalability."
   superseded_by:
     - node_id: rl_heuristics
       note: "RL heuristics achieve near-BIP quality at SABRE-level runtime, making BIP's scalability limitations moot for large circuits."

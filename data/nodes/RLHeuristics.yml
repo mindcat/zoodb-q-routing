@@ -21,7 +21,7 @@ relations:
       note: "Structurally adapts SABRE's DAG-layer framework but replaces its handcrafted cost function with a learned heuristic."
   improves_upon:
     - node_id: sabre
-      note: "~40\% depth reduction and ~10\% gate count reduction on large circuits while maintaining comparable runtime to SABRE."
+      note: "~40 percent depth reduction and ~10 percent gate count reduction on large circuits while maintaining comparable runtime to SABRE."
   inspired_by:
     - node_id: bip
       note: "Motivated by the optimality achievable via BIP, targeting scalability that BIP's NP-hard formulation cannot provide."

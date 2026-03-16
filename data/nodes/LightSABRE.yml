@@ -24,4 +24,4 @@ relations:
       note: "Retains SABRE's DAG-layer framework, bidirectional traversal, and heuristic cost function. All seven improvements are backward-compatible extensions of SABRE's core design."
   improves_upon:
     - node_id: sabre
-      note: "~200x faster runtime (Qiskit 0.20.1 to 1.2.0); 18.9\% average SWAP reduction; adds control flow support, disjoint graph handling, and release valve that original SABRE lacks entirely."
+      note: "~200x faster runtime (Qiskit 0.20.1 to 1.2.0); 18.9 percent average SWAP reduction; adds control flow support, disjoint graph handling, and release valve that original SABRE lacks entirely."
